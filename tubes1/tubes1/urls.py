@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include,path
 from crudex import views
+from home import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app2/', include('app2.urls')),
     path('crudex/', include('crudex.urls')),
-    path('',views.index, name='index'),
+    path('',views.homepage, name='homepage'),
 ]
