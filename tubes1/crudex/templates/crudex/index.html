@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>crudex</title>
+</head>
+<body>
+    <h2>Selamat Datang di 7Digital Website</h2>
+    <p>Tempat Create, Update, dan Delete data Produk Kamera</p>
+    {% if products_from_context %}
+            <ul>
+                {% for product in products_from_context %}
+                    <li>{{ product.product_value }} 
+                        <form id = "product_form" method="post" action="/crudex/del/{{ product.product_value }}">
+                            {% csrf_token %} <input type="submit" product="submit" value="Delete">
+                        </form>
+                        <form id ="product_form" method="POST" action="/">
+                            {% csrf_token %}
+                            {% for field in form.visible_fields %}
+                                {{ field.errors }}
+                                {{ field.help_text}}
+                                {{ field }}
+                            {% endfor %}
+                            <input type="submit" product="submit" value="Update">
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+    {% else %}
+        <h3>Please Go to Admin and add a New Product under 'CRUDEX'</h3>
+    {% endif %}
+
+    <h3>add a Product</h3>
+    <form id ="product_form" method="POST" action="/">
+        {% csrf_token %}
+        {% for field in form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text}}
+            {{ field }}
+        {% endfor %}
+        <input type="submit" product="submit" value="Create">
+    </form>
+    
+</body>
+</html>
